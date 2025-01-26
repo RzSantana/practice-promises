@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice 2 - Temporizadores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .counter {
+            font-size: 24px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Timer System</h1>
+
+    <div id="timerDisplay"></div>
+    <div id="counter1" class="counter"></div>
+    <div id="counter2" class="counter"></div>
+
+    <script type="module">
+        import { timer, countdown } from './timer.js';
+
+        const timerElement = document.getElementById('timerDisplay');
+        timer(5000)
+            .then(result => {
+                timerElement.textContent = result;
+            })
+            .catch(error => {
+                timerElement.textContent = error;
+            });
+
+        const element1 = document.getElementById('counter1');
+        const element2 = document.getElementById('counter2');
+
+        countdown(5, element1, 1000);
+
+        countdown(60, element2, 100, () => {
+            const endElement = document.createElement('div');
+            endElement.textContent = 'End';
+            element2.appendChild(endElement);
+        });
+    </script>
+</body>
+</html>
